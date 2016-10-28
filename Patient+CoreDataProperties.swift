@@ -18,7 +18,7 @@ extension Patient {
 
     @NSManaged public var migrains: Bool
     @NSManaged public var age: Int32
-    @NSManaged public var male: Bool
+    @NSManaged public var sex: String
     @NSManaged public var drugUse: Bool
     @NSManaged public var name: String
     @NSManaged public var risk: Double

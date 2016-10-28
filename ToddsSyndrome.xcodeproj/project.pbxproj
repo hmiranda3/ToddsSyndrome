@@ -15,11 +15,13 @@
 		2885836B1DC2ABA800B80C28 /* ToddsSyndromeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2885836A1DC2ABA800B80C28 /* ToddsSyndromeTests.swift */; };
 		288583761DC2ABA800B80C28 /* ToddsSyndromeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288583751DC2ABA800B80C28 /* ToddsSyndromeUITests.swift */; };
 		288583891DC2ACE200B80C28 /* Patient.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 288583871DC2ACE200B80C28 /* Patient.xcdatamodeld */; };
-		288583991DC2B14900B80C28 /* Patient+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288583971DC2B14900B80C28 /* Patient+CoreDataClass.swift */; };
-		2885839A1DC2B14900B80C28 /* Patient+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288583981DC2B14900B80C28 /* Patient+CoreDataProperties.swift */; };
 		2885839C1DC2B3A200B80C28 /* PatientListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2885839B1DC2B3A200B80C28 /* PatientListTableViewController.swift */; };
 		2885839E1DC2B3BF00B80C28 /* InterviewTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2885839D1DC2B3BF00B80C28 /* InterviewTableViewController.swift */; };
 		288583A01DC3161700B80C28 /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2885839F1DC3161700B80C28 /* Stack.swift */; };
+		288583A31DC318C000B80C28 /* Patient+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288583A11DC318C000B80C28 /* Patient+CoreDataClass.swift */; };
+		288583A41DC318C000B80C28 /* Patient+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288583A21DC318C000B80C28 /* Patient+CoreDataProperties.swift */; };
+		288583A81DC31C0000B80C28 /* PatientController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288583A71DC31C0000B80C28 /* PatientController.swift */; };
+		28D73E281DC34A9000236325 /* JSON in Resources */ = {isa = PBXBuildFile; fileRef = 28D73E271DC34A9000236325 /* JSON */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,11 +56,13 @@
 		288583751DC2ABA800B80C28 /* ToddsSyndromeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToddsSyndromeUITests.swift; sourceTree = "<group>"; };
 		288583771DC2ABA800B80C28 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		288583881DC2ACE200B80C28 /* Patient.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Patient.xcdatamodel; sourceTree = "<group>"; };
-		288583971DC2B14900B80C28 /* Patient+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Patient+CoreDataClass.swift"; sourceTree = "<group>"; };
-		288583981DC2B14900B80C28 /* Patient+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Patient+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		2885839B1DC2B3A200B80C28 /* PatientListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PatientListTableViewController.swift; sourceTree = "<group>"; };
 		2885839D1DC2B3BF00B80C28 /* InterviewTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterviewTableViewController.swift; sourceTree = "<group>"; };
 		2885839F1DC3161700B80C28 /* Stack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
+		288583A11DC318C000B80C28 /* Patient+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Patient+CoreDataClass.swift"; path = "../Patient+CoreDataClass.swift"; sourceTree = "<group>"; };
+		288583A21DC318C000B80C28 /* Patient+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Patient+CoreDataProperties.swift"; path = "../Patient+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		288583A71DC31C0000B80C28 /* PatientController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PatientController.swift; path = ../PatientController.swift; sourceTree = "<group>"; };
+		28D73E271DC34A9000236325 /* JSON */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = JSON; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,16 +114,15 @@
 			isa = PBXGroup;
 			children = (
 				288583521DC2ABA800B80C28 /* AppDelegate.swift */,
-				288583871DC2ACE200B80C28 /* Patient.xcdatamodeld */,
+				288583A51DC31B5E00B80C28 /* CoreData */,
 				288583921DC2AE8D00B80C28 /* Model */,
-				288583561DC2ABA800B80C28 /* Main.storyboard */,
-				2885839B1DC2B3A200B80C28 /* PatientListTableViewController.swift */,
-				2885839D1DC2B3BF00B80C28 /* InterviewTableViewController.swift */,
+				288583A61DC31B8300B80C28 /* Views */,
+				288583A91DC31C0C00B80C28 /* Controller */,
 				2885835C1DC2ABA800B80C28 /* Assets.xcassets */,
+				28D73E271DC34A9000236325 /* JSON */,
 				2885835E1DC2ABA800B80C28 /* LaunchScreen.storyboard */,
 				288583611DC2ABA800B80C28 /* Info.plist */,
 				288583591DC2ABA800B80C28 /* ToddsSyndrome.xcdatamodeld */,
-				2885839F1DC3161700B80C28 /* Stack.swift */,
 			);
 			path = ToddsSyndrome;
 			sourceTree = "<group>";
@@ -145,10 +148,37 @@
 		288583921DC2AE8D00B80C28 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				288583971DC2B14900B80C28 /* Patient+CoreDataClass.swift */,
-				288583981DC2B14900B80C28 /* Patient+CoreDataProperties.swift */,
+				288583871DC2ACE200B80C28 /* Patient.xcdatamodeld */,
+				288583A11DC318C000B80C28 /* Patient+CoreDataClass.swift */,
+				288583A21DC318C000B80C28 /* Patient+CoreDataProperties.swift */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		288583A51DC31B5E00B80C28 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				2885839F1DC3161700B80C28 /* Stack.swift */,
+			);
+			name = CoreData;
+			sourceTree = "<group>";
+		};
+		288583A61DC31B8300B80C28 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				288583561DC2ABA800B80C28 /* Main.storyboard */,
+				2885839B1DC2B3A200B80C28 /* PatientListTableViewController.swift */,
+				2885839D1DC2B3BF00B80C28 /* InterviewTableViewController.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		288583A91DC31C0C00B80C28 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				288583A71DC31C0000B80C28 /* PatientController.swift */,
+			);
+			name = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -263,6 +293,7 @@
 			files = (
 				288583601DC2ABA800B80C28 /* LaunchScreen.storyboard in Resources */,
 				2885835D1DC2ABA800B80C28 /* Assets.xcassets in Resources */,
+				28D73E281DC34A9000236325 /* JSON in Resources */,
 				288583581DC2ABA800B80C28 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -289,13 +320,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				288583891DC2ACE200B80C28 /* Patient.xcdatamodeld in Sources */,
-				2885839A1DC2B14900B80C28 /* Patient+CoreDataProperties.swift in Sources */,
+				288583A31DC318C000B80C28 /* Patient+CoreDataClass.swift in Sources */,
 				288583531DC2ABA800B80C28 /* AppDelegate.swift in Sources */,
 				2885839C1DC2B3A200B80C28 /* PatientListTableViewController.swift in Sources */,
 				288583A01DC3161700B80C28 /* Stack.swift in Sources */,
+				288583A81DC31C0000B80C28 /* PatientController.swift in Sources */,
 				2885839E1DC2B3BF00B80C28 /* InterviewTableViewController.swift in Sources */,
+				288583A41DC318C000B80C28 /* Patient+CoreDataProperties.swift in Sources */,
 				2885835B1DC2ABA800B80C28 /* ToddsSyndrome.xcdatamodeld in Sources */,
-				288583991DC2B14900B80C28 /* Patient+CoreDataClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -546,6 +578,7 @@
 				2885837C1DC2ABA800B80C28 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2885837D1DC2ABA800B80C28 /* Build configuration list for PBXNativeTarget "ToddsSyndromeTests" */ = {
 			isa = XCConfigurationList;
@@ -554,6 +587,7 @@
 				2885837F1DC2ABA800B80C28 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		288583801DC2ABA800B80C28 /* Build configuration list for PBXNativeTarget "ToddsSyndromeUITests" */ = {
 			isa = XCConfigurationList;
@@ -562,6 +596,7 @@
 				288583821DC2ABA800B80C28 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

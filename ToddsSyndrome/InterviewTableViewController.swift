@@ -8,10 +8,12 @@
 
 import UIKit
 
-class InterviewTableViewController: UITableViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate{
+class InterviewTableViewController: UITableViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate, UINavigationControllerDelegate{
     
     let yesNoArray = ["Yes", "No"]
     let genderArray = ["Male", "Female"]
+    
+    var patient: Patient?
 
     //MARK: Interview IB Outlets:
     
@@ -26,6 +28,10 @@ class InterviewTableViewController: UITableViewController, UIPickerViewDataSourc
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if let patient = patient {
+            updateWithPatient(patient)
+        }
         
         addDoneButton()
 
@@ -43,7 +49,19 @@ class InterviewTableViewController: UITableViewController, UIPickerViewDataSourc
         
     }
     
+    //Redundant, fix it.
     @IBAction func saveButtonTapped(_ sender: AnyObject) {
+        emptyTextfieldAlert()
+        if patient == nil && nameTextField.text != "" && ageTextField.text != "" && sexTextField.text != "" && migrainsTextField.text != "" && drugsTextField.text != "" {
+            emptyTextfieldAlert()
+            createPatient()
+            _ = navigationController?.popViewController(animated: true)
+        } else if nameTextField.text != "" && ageTextField.text != "" && sexTextField.text != "" && migrainsTextField.text != "" && drugsTextField.text != ""  {
+            emptyTextfieldAlert()
+            updatePatient()
+            _ = navigationController?.popViewController(animated: true)
+        }
+
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
@@ -113,29 +131,6 @@ class InterviewTableViewController: UITableViewController, UIPickerViewDataSourc
 
     //MARK: Calculating and Displayng Risk
     
-//    func calculateRisk() -> Double {
-//        var risk: Double = 0.0
-//        
-//        if let age = Int((ageTextField?.text)!) {
-//            if age <= 15 {
-//                risk += 25
-//            }
-//        }
-//        
-//        if sexTextField.text == "Male" {
-//            risk += 25
-//        }
-//        
-//        if migrainsTextField.text == "Yes" {
-//            risk += 25
-//        }
-//        
-//        if drugsTextField.text == "Yes" {
-//            risk += 25
-//        }
-//        
-//        return risk
-//    }
     
     func displayRisk() {
         var risk: Double = 0.0
@@ -158,15 +153,137 @@ class InterviewTableViewController: UITableViewController, UIPickerViewDataSourc
             risk += 25
         }
 
-        riskLabel.text = "\(risk)%"
+        riskLabel.text = "\(risk)"
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         displayRisk()
     }
     
+    // MARK: - Core Data Functionality
+    
+    func createPatient() {
+        var drugUse: Bool
+        var migrains: Bool
+        guard let name = nameTextField.text,
+            let age = Int32(ageTextField.text!),
+            let sex = sexTextField.text,
+            let risk = Double(riskLabel.text!) else { return }
+        
+        if migrainsTextField.text == "True" {
+            migrains = true
+        } else {
+            migrains = false
+        }
+        if drugsTextField.text == "True" {
+            drugUse = true
+        } else {
+            drugUse = false
+        }
 
+        PatientController.sharedInstance.addPatient(name, age: age, sex: sex, migrains: migrains, drugUse: drugUse, risk: risk)
+    }
+    
+    func updatePatient() {
+        var drugUse: Bool
+        var migrains: Bool
+        guard let name = nameTextField.text,
+            let age = Int32(ageTextField.text!),
+            let sex = sexTextField.text,
+            let risk = Double(riskLabel.text!) else { return }
+        
+        if migrainsTextField.text == "True" {
+            migrains = true
+        } else {
+            migrains = false
+        }
+        if drugsTextField.text == "True" {
+            drugUse = true
+        } else {
+            drugUse = false
+        }
+        
+        
+        if let patient = self.patient {
+            PatientController.sharedInstance.updatePatient(patient, name: name, age: age, sex: sex, migrains: migrains, drugUse: drugUse, risk: risk)
+        }
+       
+    }
+    
+    func updateWithPatient(_ patient: Patient) {
+        self.patient = patient
+        
+        title = patient.name
+        nameTextField.text = patient.name
+        
+        ageTextField.text = "\(patient.age)"
+        
+        sexTextField.text = patient.sex
+        
+        if patient.migrains == true {
+            migrainsTextField.text = "True"
+        } else {
+            migrainsTextField.text = "False"
+        }
+        if patient.drugUse == true {
+            drugsTextField.text = "True"
+        } else {
+            drugsTextField.text = "False"
+        }
+        
+        riskLabel.text = "\(patient.risk)"
+        
+    }
 
+    func emptyTextfieldAlert() {
+        
+        if (nameTextField.text!.isEmpty) {
+            let alert = UIAlertController()
+            alert.title = "No name entered!"
+            alert.message = "Please enter a name."
+            let okAction = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
+            alert.addAction(okAction)
+            present(alert, animated: true, completion: nil)
+        }
+        
+        if (ageTextField.text!.isEmpty) {
+            let alert = UIAlertController()
+            alert.title = "Please enter an age!"
+            alert.message = "In order to evaluate risk, you need to enter an age."
+            let okAction = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
+            alert.addAction(okAction)
+            present(alert, animated: true, completion: nil)
+        }
+        
+        if (sexTextField.text!.isEmpty) {
+            let alert = UIAlertController()
+            alert.title = "Please indicate gender!"
+            alert.message = "Gender is important in order to calculate risk."
+            let okAction = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
+            alert.addAction(okAction)
+            present(alert, animated: true, completion: nil)
+        }
+        
+        if (migrainsTextField.text!.isEmpty) {
+            let alert = UIAlertController()
+            alert.title = "Migrain info required!"
+            alert.message = "Migrains are an important factor in determining risk."
+            let okAction = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
+            alert.addAction(okAction)
+            present(alert, animated: true, completion: nil)
+        }
+        
+        if (drugsTextField.text!.isEmpty) {
+            let alert = UIAlertController()
+            alert.title = "Does the patient use drugs?"
+            alert.message = "Drug use is important in order to calculate risk."
+            let okAction = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
+            alert.addAction(okAction)
+            present(alert, animated: true, completion: nil)
+        }
+    }
+
+    
     
     // MARK: - Table view data source
 
@@ -182,59 +299,5 @@ class InterviewTableViewController: UITableViewController, UIPickerViewDataSourc
     }
     
 
-    /*
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
-        return cell
-    }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+   
 }
